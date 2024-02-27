@@ -7,9 +7,6 @@ public class ActorStat : ScriptableObject
     [Header("Stat - Component: ")]
     public int hp;
     public float moveSpeed;
-    public float damage;
-    public float bulletAttackRate;
-    public float swordAttackRate;
 
     public float invincibleTime;
     public float knockBackTime;

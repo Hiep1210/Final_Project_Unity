@@ -5,7 +5,7 @@ using UnityEngine;
 public class GamepadController : Singleton<GamepadController>
 {
     private bool m_isOnMobile;
-    private bool m_isAttack;
+    private bool m_isFireBullet;
     private bool m_canMoveLeft;
     private bool m_canMoveRight;
     private bool m_canMoveUp;
@@ -19,7 +19,7 @@ public class GamepadController : Singleton<GamepadController>
     private float m_currentScrollHoldingTime;
     private bool m_isScrollHolding;
 
-    public bool IsAttack { get => m_isAttack; }
+    public bool IsFireBulletAttack { get => m_isFireBullet; }
     public bool CanMoveLeft { get => m_canMoveLeft; }
     public bool CanMoveRight { get => m_canMoveRight; }
     public bool CanMoveUp { get => m_canMoveUp; }
@@ -49,7 +49,7 @@ public class GamepadController : Singleton<GamepadController>
             m_canMoveDown = vertCheck < 0 ? true : false;
             m_canMoveUp = vertCheck > 0 ? true : false;
 
-            m_isAttack = Input.GetMouseButtonDown(0) ? true : false;
+            m_isFireBullet = Input.GetMouseButtonDown(0) ? true : false;
             m_canScroll = Input.GetKeyDown(KeyCode.Space);
 
             if (m_canScroll)

@@ -8,4 +8,5 @@ public class EnemyStat : ActorStat
     [Header("Enemy-Stat")]
     public float movingSpeed;
     public float chassingSpeed;
+    public float damage;
 }

@@ -20,11 +20,13 @@ public class Actor : MonoBehaviour
     public GameObject knockBackVfx;
 
     protected Rigidbody2D m_rb;
-    protected float m_currentSpeed;
+    protected float m_currentmoveSpeed;
     protected bool m_isFireBullet;
-    protected bool m_isDead;
+    private bool isDead;
     protected float m_horizontal;
     protected float m_vertical;
+
+    public bool IsDead { get => isDead; set => isDead = value; }
 
     protected virtual void Awake()
     {
@@ -68,13 +70,13 @@ public class Actor : MonoBehaviour
 
     protected void ReduceActionTime(ref bool isAction, ref float currentTimeAction, float timeRateAction)
     {
-        if (isAction) return;
+        if (!isAction) return;
 
         currentTimeAction += Time.deltaTime;
         if(currentTimeAction >= timeRateAction)
         {
             currentTimeAction = 0;
-            isAction = true;
+            isAction = false;
         }
     }
 
