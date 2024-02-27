@@ -21,6 +21,7 @@ public class Actor : MonoBehaviour
 
     protected Rigidbody2D m_rb;
     protected float m_currentSpeed;
+    protected bool m_isFireBullet;
     protected bool m_isDead;
     protected float m_horizontal;
     protected float m_vertical;
@@ -32,7 +33,9 @@ public class Actor : MonoBehaviour
     }
 
 
-    public void FlipCharacters(Direction direction)
+
+
+    protected void FlipCharacters(Direction direction)
     {
         switch (direction)
         {
@@ -60,6 +63,18 @@ public class Actor : MonoBehaviour
                     spriteRenderer.transform.localScale = new Vector3(spriteRenderer.transform.localScale.x, spriteRenderer.transform.localScale.y * -1f, spriteRenderer.transform.localScale.z);
                 }
                 break;
+        }
+    }
+
+    protected void ReduceActionTime(ref bool isAction, ref float currentTimeAction, float timeRateAction)
+    {
+        if (isAction) return;
+
+        currentTimeAction += Time.deltaTime;
+        if(currentTimeAction >= timeRateAction)
+        {
+            currentTimeAction = 0;
+            isAction = true;
         }
     }
 

@@ -15,7 +15,10 @@ MonoBehaviour:
   hp: 3
   moveSpeed: 2
   damage: 1
+  bulletAttackRate: 0
+  swordAttackRate: 0
   invincibleTime: 0
   knockBackTime: 0
   forceKnockBack: 0
-  speedScroll: 0
+  speedScroll: 10
+  scrollTimeRate: 1

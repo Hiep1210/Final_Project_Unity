@@ -12,6 +12,11 @@ public class Player : Actor
 
     private PlayerStateAnimator m_previewState;
 
+
+    private bool m_isScroll;
+    private float m_isScrollTime;
+
+
     protected override void Awake()
     {
         base.Awake();
@@ -21,7 +26,7 @@ public class Player : Actor
         }
 
         m_currentSpeed = m_playerStat.moveSpeed;
-
+        m_isScroll = true;
         InitStateFSM();
     }
 
@@ -34,11 +39,13 @@ public class Player : Actor
     // Update is called once per frame
     void Update()
     {
+        if (m_isDead) return;
+        ReduceActionTime(ref m_isScroll,ref m_isScrollTime, m_playerStat.scrollTimeRate);
     }
 
     private void FixedUpdate()
     {
-        
+
     }
 
 
@@ -93,8 +100,15 @@ public class Player : Actor
 
     private void Scroll()
     {
-        
+        float dir = spriteRenderer.transform.localScale.x > 0 ? 1 : -1;
+        m_rb.velocity = new Vector2(dir * m_currentSpeed, m_rb.velocity.y);
     }
+
+    private void SmothScroll()
+    {
+
+    }
+
 
     #region FSM - Player
     protected virtual void InitStateFSM()
@@ -127,21 +141,27 @@ public class Player : Actor
     void Idle_Enter()
     {
         m_currentSpeed = m_playerStat.moveSpeed;
+        m_rb.velocity = Vector2.zero;
     }
     void Idle_Update()
     {
         Helper.PlayAnim(animator, PlayerStateAnimator.Idle.ToString());
-        if(m_gPad.CanMoveLeft || m_gPad.CanMoveRight || m_gPad.CanMoveUp || m_gPad.CanMoveDown)
+        if (m_gPad.CanMoveLeft || m_gPad.CanMoveRight || m_gPad.CanMoveUp || m_gPad.CanMoveDown)
         {
             ChangeState(PlayerStateAnimator.Walk);
         }
+
+        if (m_gPad.CanScroll && m_gPad && m_isScroll)
+        {
+            ChangeState(PlayerStateAnimator.Scroll);
+        }
     }
     void Idle_Exit() { }
-    void Walk_Enter() 
+    void Walk_Enter()
     {
         m_currentSpeed = m_playerStat.moveSpeed;
     }
-    void Walk_Update() 
+    void Walk_Update()
     {
         Helper.PlayAnim(animator, PlayerStateAnimator.Walk.ToString());
 
@@ -151,13 +171,36 @@ public class Player : Actor
         {
             ChangeState(PlayerStateAnimator.Idle);
         }
+
+
+        if (m_gPad.CanScroll && m_gPad && m_isScroll)
+        {
+            ChangeState(PlayerStateAnimator.Scroll);
+        }
     }
     void Walk_Exit() { }
     void Run_Enter() { }
     void Run_Update() { }
     void Run_Exit() { }
-    void Scroll_Enter() { }
-    void Scroll_Update() { }
+    void Scroll_Enter() 
+    {
+        m_currentSpeed = m_playerStat.speedScroll;
+        m_isScroll = false;
+        Scroll();
+        if (m_gPad.IsStatic)
+        {
+            InvokeChangeStateCo(PlayerStateAnimator.Idle);
+        }
+
+        if (m_gPad.CanMoveLeft || m_gPad.CanMoveRight || m_gPad.CanMoveUp || m_gPad.CanMoveDown)
+        {
+            InvokeChangeStateCo(PlayerStateAnimator.Walk);
+        }
+    }
+    void Scroll_Update() 
+    {
+        Helper.PlayAnim(animator, PlayerStateAnimator.Scroll.ToString());
+    }
     void Scroll_Exit() { }
     void SwordAttack_Enter() { }
     void SwordAttack_Update() { }
