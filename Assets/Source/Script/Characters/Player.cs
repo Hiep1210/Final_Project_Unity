@@ -18,6 +18,7 @@ public class Player : Actor
     private StateMachine<PlayerStateAnimator> m_fsm;
     private PlayerStateAnimator m_previewState;
 
+
     private bool m_isScroll;
     private float m_isScrollTime;
 
@@ -30,6 +31,8 @@ public class Player : Actor
             m_playerStat = actorStat as PlayerStat;
         }
 
+        m_currentmoveSpeed = m_playerStat.moveSpeed;
+        m_isScroll = false;
         InitStateFSM();
     }
 
