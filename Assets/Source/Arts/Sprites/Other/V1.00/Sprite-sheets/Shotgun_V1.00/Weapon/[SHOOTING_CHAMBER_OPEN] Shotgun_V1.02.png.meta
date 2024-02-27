@@ -43,12 +43,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 36
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -173,7 +173,301 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: '[SHOOTING_CHAMBER_OPEN] Shotgun_V1.02_0'
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 0
+        width: 96
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f3cc57be9d7c964fa123b6512971e9e
+      internalID: 661871576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: '[SHOOTING_CHAMBER_OPEN] Shotgun_V1.02_1'
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 98
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3334b36ce50b7864680f11038038adf8
+      internalID: 758487967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: '[SHOOTING_CHAMBER_OPEN] Shotgun_V1.02_2'
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 96
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c09eaae747910747847eeb3009b25ab
+      internalID: 90445834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: '[SHOOTING_CHAMBER_OPEN] Shotgun_V1.02_3'
+      rect:
+        serializedVersion: 2
+        x: 479
+        y: 0
+        width: 96
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c4dc9d884d4d7946a542f7187d6c772
+      internalID: 879164537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: '[SHOOTING_CHAMBER_OPEN] Shotgun_V1.02_4'
+      rect:
+        serializedVersion: 2
+        x: 641
+        y: 0
+        width: 97
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d55a3cf47db2194eb7d0b5639db1470
+      internalID: 514850612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: '[SHOOTING_CHAMBER_OPEN] Shotgun_V1.02_5'
+      rect:
+        serializedVersion: 2
+        x: 802
+        y: 0
+        width: 98
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b0aafbab0a829945be0d3937c002145
+      internalID: -457935736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: '[SHOOTING_CHAMBER_OPEN] Shotgun_V1.02_6'
+      rect:
+        serializedVersion: 2
+        x: 964
+        y: 0
+        width: 96
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53b82f7afbd7b0d4f9f50f79e51cebef
+      internalID: 734130251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: '[SHOOTING_CHAMBER_OPEN] Shotgun_V1.02_7'
+      rect:
+        serializedVersion: 2
+        x: 1124
+        y: 0
+        width: 96
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3f7ec5939cb201498abb362cb82bb9a
+      internalID: 242874061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: '[SHOOTING_CHAMBER_OPEN] Shotgun_V1.02_8'
+      rect:
+        serializedVersion: 2
+        x: 1282
+        y: 0
+        width: 98
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 268d240f69973034da01a435a0b4168f
+      internalID: 1389641239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: '[SHOOTING_CHAMBER_OPEN] Shotgun_V1.02_9'
+      rect:
+        serializedVersion: 2
+        x: 1443
+        y: 0
+        width: 96
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b5e875516ff1e44fa763c916f0a2c69
+      internalID: -390329028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: '[SHOOTING_CHAMBER_OPEN] Shotgun_V1.02_10'
+      rect:
+        serializedVersion: 2
+        x: 1603
+        y: 0
+        width: 96
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40b0677e2d548c94d8a7d78079057366
+      internalID: -830358320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: '[SHOOTING_CHAMBER_OPEN] Shotgun_V1.02_11'
+      rect:
+        serializedVersion: 2
+        x: 1763
+        y: 0
+        width: 96
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc5e002a4cc32cf438f4d5d564afdd4e
+      internalID: 1745934468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: '[SHOOTING_CHAMBER_OPEN] Shotgun_V1.02_12'
+      rect:
+        serializedVersion: 2
+        x: 1922
+        y: 0
+        width: 98
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15f38e4003bc2b54bab275b782fe43b1
+      internalID: -2090872494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: '[SHOOTING_CHAMBER_OPEN] Shotgun_V1.02_13'
+      rect:
+        serializedVersion: 2
+        x: 2083
+        y: 0
+        width: 96
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28ee0eee3cabdab41862523f6830db32
+      internalID: 969799218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -184,7 +478,21 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      '[SHOOTING_CHAMBER_OPEN] Shotgun_V1.02_0': 661871576
+      '[SHOOTING_CHAMBER_OPEN] Shotgun_V1.02_1': 758487967
+      '[SHOOTING_CHAMBER_OPEN] Shotgun_V1.02_10': -830358320
+      '[SHOOTING_CHAMBER_OPEN] Shotgun_V1.02_11': 1745934468
+      '[SHOOTING_CHAMBER_OPEN] Shotgun_V1.02_12': -2090872494
+      '[SHOOTING_CHAMBER_OPEN] Shotgun_V1.02_13': 969799218
+      '[SHOOTING_CHAMBER_OPEN] Shotgun_V1.02_2': 90445834
+      '[SHOOTING_CHAMBER_OPEN] Shotgun_V1.02_3': 879164537
+      '[SHOOTING_CHAMBER_OPEN] Shotgun_V1.02_4': 514850612
+      '[SHOOTING_CHAMBER_OPEN] Shotgun_V1.02_5': -457935736
+      '[SHOOTING_CHAMBER_OPEN] Shotgun_V1.02_6': 734130251
+      '[SHOOTING_CHAMBER_OPEN] Shotgun_V1.02_7': 242874061
+      '[SHOOTING_CHAMBER_OPEN] Shotgun_V1.02_8': 1389641239
+      '[SHOOTING_CHAMBER_OPEN] Shotgun_V1.02_9': -390329028
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

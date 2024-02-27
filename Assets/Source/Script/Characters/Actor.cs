@@ -20,6 +20,7 @@ public class Actor : MonoBehaviour
     public GameObject knockBackVfx;
 
     protected Rigidbody2D m_rb;
+    protected int m_currentHp;
     protected float m_currentmoveSpeed;
     protected bool m_isFireBullet;
     private bool isDead;
@@ -32,6 +33,8 @@ public class Actor : MonoBehaviour
     {
         m_rb = GetComponent<Rigidbody2D>();
         m_rb.gravityScale = 0f;
+        m_currentHp = actorStat.hp;
+        m_currentmoveSpeed = actorStat.moveSpeed;
     }
 
 

@@ -43,12 +43,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 36
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -173,7 +173,301 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: '[RELOAD] Shotgun_V1.02 - Rreloading_01_0'
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 1
+        width: 94
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16831824411d0ad41b9f574a982b2e67
+      internalID: -1541769075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: '[RELOAD] Shotgun_V1.02 - Rreloading_01_1'
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 1
+        width: 94
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62524b4ac6fb7de4fbe397761dcf969b
+      internalID: -1047659344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: '[RELOAD] Shotgun_V1.02 - Rreloading_01_2'
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 1
+        width: 94
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3298c7aa95428c749bc9a3b0932559e6
+      internalID: 749287562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: '[RELOAD] Shotgun_V1.02 - Rreloading_01_3'
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 1
+        width: 94
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3c98828c52921940b11b566c53456cb
+      internalID: -467721685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: '[RELOAD] Shotgun_V1.02 - Rreloading_01_4'
+      rect:
+        serializedVersion: 2
+        x: 515
+        y: 1
+        width: 94
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d885ba69652c3ee41996fd2481d30667
+      internalID: 617960802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: '[RELOAD] Shotgun_V1.02 - Rreloading_01_5'
+      rect:
+        serializedVersion: 2
+        x: 643
+        y: 1
+        width: 94
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9358e70f6782e114a8df3ca505bca118
+      internalID: 364283913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: '[RELOAD] Shotgun_V1.02 - Rreloading_01_6'
+      rect:
+        serializedVersion: 2
+        x: 771
+        y: 1
+        width: 94
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f18c4ed10810b14387929b7a5aeacdb
+      internalID: 216444259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: '[RELOAD] Shotgun_V1.02 - Rreloading_01_7'
+      rect:
+        serializedVersion: 2
+        x: 899
+        y: 1
+        width: 94
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22fa2be2bf13fc241a3c53819db07cc4
+      internalID: -1019605083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: '[RELOAD] Shotgun_V1.02 - Rreloading_01_8'
+      rect:
+        serializedVersion: 2
+        x: 1027
+        y: 1
+        width: 94
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b2e3aace3e204e4a817dd502ce9e945
+      internalID: -645902767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: '[RELOAD] Shotgun_V1.02 - Rreloading_01_9'
+      rect:
+        serializedVersion: 2
+        x: 1155
+        y: 1
+        width: 94
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af36511aa678bf942aad92e609538bba
+      internalID: -321822462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: '[RELOAD] Shotgun_V1.02 - Rreloading_01_10'
+      rect:
+        serializedVersion: 2
+        x: 1283
+        y: 1
+        width: 94
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4553854c87de7a444a45fc795a237a2f
+      internalID: 1381678381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: '[RELOAD] Shotgun_V1.02 - Rreloading_01_11'
+      rect:
+        serializedVersion: 2
+        x: 1411
+        y: 1
+        width: 94
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd10c35535289d543881184d3c6a57c7
+      internalID: 1562197934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: '[RELOAD] Shotgun_V1.02 - Rreloading_01_12'
+      rect:
+        serializedVersion: 2
+        x: 1541
+        y: 1
+        width: 94
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 566a7ec06e84c0745baf548b7cba0f28
+      internalID: -775144431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: '[RELOAD] Shotgun_V1.02 - Rreloading_01_13'
+      rect:
+        serializedVersion: 2
+        x: 1668
+        y: 1
+        width: 94
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35e54a443b25a1a4bbf1f40577280abf
+      internalID: 1339419828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -184,7 +478,21 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      '[RELOAD] Shotgun_V1.02 - Rreloading_01_0': -1541769075
+      '[RELOAD] Shotgun_V1.02 - Rreloading_01_1': -1047659344
+      '[RELOAD] Shotgun_V1.02 - Rreloading_01_10': 1381678381
+      '[RELOAD] Shotgun_V1.02 - Rreloading_01_11': 1562197934
+      '[RELOAD] Shotgun_V1.02 - Rreloading_01_12': -775144431
+      '[RELOAD] Shotgun_V1.02 - Rreloading_01_13': 1339419828
+      '[RELOAD] Shotgun_V1.02 - Rreloading_01_2': 749287562
+      '[RELOAD] Shotgun_V1.02 - Rreloading_01_3': -467721685
+      '[RELOAD] Shotgun_V1.02 - Rreloading_01_4': 617960802
+      '[RELOAD] Shotgun_V1.02 - Rreloading_01_5': 364283913
+      '[RELOAD] Shotgun_V1.02 - Rreloading_01_6': 216444259
+      '[RELOAD] Shotgun_V1.02 - Rreloading_01_7': -1019605083
+      '[RELOAD] Shotgun_V1.02 - Rreloading_01_8': -645902767
+      '[RELOAD] Shotgun_V1.02 - Rreloading_01_9': -321822462
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -64,7 +64,8 @@ public class GamepadController : Singleton<GamepadController>
                 if (m_currentScrollHoldingTime > scrollHoldTime)
                 {
                     m_isScrollHolding = Input.GetKey(KeyCode.Space);
-                    if (!m_isScrollHolding) m_currentScrollHoldingTime = 0f;
+                    if (!m_isScrollHolding) 
+                        m_currentScrollHoldingTime = 0f;
                 }
             }
 
