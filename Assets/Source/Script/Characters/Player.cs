@@ -7,9 +7,10 @@ using UnityEngine;
 public class Player : Actor
 {
     [Header("Smooth Scroll: ")]
-    public float leftScrollMultipiler;
-    public float rightScrollMultipiler;
-    private Vector3 gravityPhysics;
+    [Range(0,10f)]
+    public float fallScrollMultipiler;
+    [Range(0, 10f)]
+    public float lowScrollMultipiler;
 
 
     private GamepadController m_gPad;
@@ -21,7 +22,7 @@ public class Player : Actor
     private bool m_isScroll;
     private float m_isScrollTime;
 
-
+    
     protected override void Awake()
     {
         base.Awake();
@@ -30,7 +31,6 @@ public class Player : Actor
             m_playerStat = actorStat as PlayerStat;
         }
 
-        gravityPhysics = new Vector2(Physics2D.gravity.x, 0f);
         m_currentmoveSpeed = m_playerStat.moveSpeed;
         m_isScroll = false;
         InitStateFSM();
@@ -51,7 +51,7 @@ public class Player : Actor
 
     private void FixedUpdate()
     {
-
+        SmoothScroll();
     }
 
 
@@ -110,15 +110,22 @@ public class Player : Actor
         m_rb.velocity = new Vector2(dir * m_currentmoveSpeed, m_rb.velocity.y);
     }
 
-    private void SmothScroll()
+    private void SmoothScroll()
     {
-        if (!m_isScroll) return;
-
-        if(m_rb.velocity.y < 0)
+        if (m_fsm.State == PlayerStateAnimator.Scroll)
         {
+            Vector2 dir = spriteRenderer.transform.localScale.x > 0 ? Vector2.right : Vector2.left;
 
+            if (m_rb.velocity.y < 0)
+            {
+                m_rb.velocity += dir * Physics2D.gravity.x * (1 - fallScrollMultipiler) * Time.deltaTime;
+            }
+
+            if (m_rb.velocity.x > 0 && !m_gPad.IsScrollHolding)
+            {
+                m_rb.velocity += dir * Physics2D.gravity.x * (1 - lowScrollMultipiler) * Time.deltaTime;
+            }
         }
-           
     }
 
 
