@@ -8,6 +8,7 @@ public class ActorStat : ScriptableObject
     public int hp;
     public float moveSpeed;
     public float damage;
+    public float bulletAttackRate;
 
     public float invincibleTime;
     public float knockBackTime;

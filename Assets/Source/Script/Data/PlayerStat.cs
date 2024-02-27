@@ -9,4 +9,5 @@ public class PlayerStat : ActorStat
 {
     [Header("Player Stat: ")]
     public float speedScroll;
+    public float scrollTimeRate;
 }

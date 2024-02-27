@@ -9,3 +9,14 @@ public enum Direction
     Up,
     Down
 }
+
+public enum PlayerStateAnimator
+{
+    Idle,
+    Walk,
+    Run,
+    Scroll,
+    SwordAttack,
+    FireBullet,
+    Dead
+}

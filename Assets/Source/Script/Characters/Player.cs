@@ -1,24 +1,34 @@
+using MonsterLove.StateMachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Player : MonoBehaviour
+public class Player : Actor
 {
-    public float moveSpeed;
+    private StateMachine<PlayerStateAnimator> m_fsm;
+    private PlayerStat m_playerStat;
+    private GamepadController m_gPad;
 
-    private float m_horizontal;
-    private float m_vertical;
+    private PlayerStateAnimator m_previewState;
 
-    private Rigidbody2D m_rb; 
-    private GamepadController gPad;
+    protected override void Awake()
+    {
+        base.Awake();
+        if (actorStat != null)
+        {
+            m_playerStat = actorStat as PlayerStat;
+        }
+
+        m_currentSpeed = m_playerStat.moveSpeed;
+
+        InitStateFSM();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        m_rb = GetComponent<Rigidbody2D>();
-        gPad = GamepadController.Ins;
-        m_rb.gravityScale = 0f;
+        m_gPad = GamepadController.Ins;
     }
 
     // Update is called once per frame
@@ -28,84 +38,137 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        MoveChecking();
+        
     }
 
-    private void Moving(Direction direction)
-    {
-        FlipCharacters(direction);
-
-        if (direction == Direction.Left || direction == Direction.Right)
-        {
-            m_horizontal = direction == Direction.Left ? -1 : 1;
-            m_rb.velocity = new Vector2(m_horizontal * moveSpeed, m_rb.velocity.y);
-        }
-
-        if (direction == Direction.Up || direction == Direction.Down)
-        {
-            m_vertical = direction == Direction.Down ? -1 : 1;
-            m_rb.velocity = new Vector2(m_rb.velocity.x, m_vertical * moveSpeed);
-        }
-    }
 
     private void MoveChecking()
     {
-        if (gPad.IsStatic)
+        if (m_gPad.IsStatic)
         {
             m_rb.velocity = Vector2.zero;
             return;
         }
 
-        if (gPad.CanMoveLeft)
+        if (m_gPad.CanMoveLeft)
         {
             Moving(Direction.Left);
         }
 
-        if (gPad.CanMoveRight)
+        if (m_gPad.CanMoveRight)
         {
             Moving(Direction.Right);
         }
 
-        if (gPad.CanMoveUp)
+        if (m_gPad.CanMoveUp)
         {
             Moving(Direction.Up);
         }
 
-        if (gPad.CanMoveDown)
+        if (m_gPad.CanMoveDown)
         {
             Moving(Direction.Down);
         }
     }
 
-    public void FlipCharacters(Direction direction)
+    private void Moving(Direction direction)
     {
-        switch (direction)
+        if (direction != Direction.Up && direction != Direction.Down)
         {
-            case Direction.Left:
-                if (transform.localScale.x > 0)
-                {
-                    transform.localScale = new Vector3(transform.localScale.x * -1f, transform.localScale.y, transform.localScale.z);
-                }
-                break;
-            case Direction.Right:
-                if (transform.localScale.x < 0)
-                {
-                    transform.localScale = new Vector3(transform.localScale.x * -1f, transform.localScale.y, transform.localScale.z);
-                }
-                break;
-            case Direction.Up:
-                if (transform.localScale.y < 0)
-                {
-                    transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * -1f, transform.localScale.z);
-                }
-                break;
-            case Direction.Down:
-                if (transform.localScale.y > 0)
-                {
-                    transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * -1f, transform.localScale.z);
-                }
-                break;
+            FlipCharacters(direction);
+        }
+
+        if (direction == Direction.Left || direction == Direction.Right)
+        {
+            m_horizontal = direction == Direction.Left ? -1 : 1;
+            m_rb.velocity = new Vector2(m_horizontal * m_currentSpeed, m_rb.velocity.y);
+        }
+
+        if (direction == Direction.Up || direction == Direction.Down)
+        {
+            m_vertical = direction == Direction.Down ? -1 : 1;
+            m_rb.velocity = new Vector2(m_rb.velocity.x, m_vertical * m_currentSpeed);
         }
     }
+
+    private void Scroll()
+    {
+        
+    }
+
+    #region FSM - Player
+    protected virtual void InitStateFSM()
+    {
+        m_fsm = StateMachine<PlayerStateAnimator>.Initialize(this);
+        m_fsm.ChangeState(PlayerStateAnimator.Idle);
+    }
+
+    private void ChangeState(PlayerStateAnimator newStateChange)
+    {
+        m_previewState = m_fsm.State;
+        m_fsm.ChangeState(newStateChange);
+    }
+
+    private void InvokeChangeStateCo(PlayerStateAnimator newStateChange, float extraTime = 0f)
+    {
+        StartCoroutine(ChangeStateCo(newStateChange, extraTime));
+    }
+
+    private IEnumerator ChangeStateCo(PlayerStateAnimator newStateChange, float extraTime = 0f)
+    {
+        AnimationClip animationClip = Helper.GetClip(animator, newStateChange.ToString());
+        if (animationClip != null)
+        {
+            yield return new WaitForSeconds(animationClip.length + extraTime);
+        }
+        ChangeState(newStateChange);
+    }
+
+    void Idle_Enter()
+    {
+        m_currentSpeed = m_playerStat.moveSpeed;
+    }
+    void Idle_Update()
+    {
+        Helper.PlayAnim(animator, PlayerStateAnimator.Idle.ToString());
+        if(m_gPad.CanMoveLeft || m_gPad.CanMoveRight || m_gPad.CanMoveUp || m_gPad.CanMoveDown)
+        {
+            ChangeState(PlayerStateAnimator.Walk);
+        }
+    }
+    void Idle_Exit() { }
+    void Walk_Enter() 
+    {
+        m_currentSpeed = m_playerStat.moveSpeed;
+    }
+    void Walk_Update() 
+    {
+        Helper.PlayAnim(animator, PlayerStateAnimator.Walk.ToString());
+
+        MoveChecking();
+
+        if (m_gPad.IsStatic)
+        {
+            ChangeState(PlayerStateAnimator.Idle);
+        }
+    }
+    void Walk_Exit() { }
+    void Run_Enter() { }
+    void Run_Update() { }
+    void Run_Exit() { }
+    void Scroll_Enter() { }
+    void Scroll_Update() { }
+    void Scroll_Exit() { }
+    void SwordAttack_Enter() { }
+    void SwordAttack_Update() { }
+    void SwordAttack_Exit() { }
+    void FireBullet_Enter() { }
+    void FireBullet_Update() { }
+    void FireBullet_Exit() { }
+    void Dead_Enter() { }
+    void Dead_Update() { }
+    void Dead_Exit() { }
+
+    #endregion
 
 }
