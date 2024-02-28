@@ -39,6 +39,7 @@ public class CameraFollow : MonoBehaviour
         if (target == null) return;
 
         Vector3 targetPos = new Vector3(target.transform.position.x, target.transform.position.y, -10f) + offset;
+        //toa do den player bi delay 
         Vector3 smoothedPos = Vector3.Lerp(transform.position, targetPos, smoothFactor * Time.deltaTime);
 
         if (Vector2.Distance(new Vector2(targetPos.x, 0f), new Vector2(smoothedPos.x, 0f)) <= 0.01f
@@ -56,7 +57,7 @@ public class CameraFollow : MonoBehaviour
         {
             m_isHozStuck = false;
         }
-
+        // set position camera den toa do
         transform.position = smoothedPos;
         transform.position = new Vector3
             (
