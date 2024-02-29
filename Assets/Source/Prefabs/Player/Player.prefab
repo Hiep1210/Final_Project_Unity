@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4626057928015331152}
   - component: {fileID: 7461302178107487208}
   - component: {fileID: 5144172170113102806}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CharacterGraphic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,9 +72,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1913621205
+  m_SortingLayer: -1
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: e13537cf7012f6f4bbdbfd12319454e5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -583,7 +583,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: cc5dbb069bea4ce499a9636e53bdcdde, type: 3}
-  m_Color: {r: 0.8470589, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -616,7 +616,7 @@ GameObject:
   - component: {fileID: 5986967946974288805}
   - component: {fileID: 1843608746712161230}
   - component: {fileID: 6386363786751333573}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}

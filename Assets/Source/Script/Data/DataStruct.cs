@@ -20,3 +20,18 @@ public enum PlayerStateAnimator
     FireBullet,
     Dead
 }
+
+public enum EnemyStateAnimator
+{
+    Idle,
+    Moving,
+    Chassing,
+    GotHit,
+    Dead
+}
+
+public enum MethodDetect
+{
+    OverlapCircle,
+    Raycast
+}

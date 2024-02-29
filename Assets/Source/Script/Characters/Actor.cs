@@ -34,9 +34,6 @@ public class Actor : MonoBehaviour
         m_rb.gravityScale = 0f;
     }
 
-
-
-
     protected void FlipCharacters(Direction direction)
     {
         switch (direction)
