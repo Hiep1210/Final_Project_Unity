@@ -13,6 +13,7 @@ public class EnemyAutoMoveFree : Enemy
         m_AutoMoveFree = GetComponent<AutoMoveFree>();
         m_AutoMoveFree.MoveSpeed = m_enemyStat.moveSpeed;
         m_AutoMoveFree.DistanceMoveAuto = distanceMove;
+        InitFSMEnemy(this);
     }
 
     protected override void MoveChecking()

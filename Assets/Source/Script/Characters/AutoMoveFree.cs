@@ -106,19 +106,13 @@ public class AutoMoveFree : MonoBehaviour
     {
         if (isRotation)
         {
-            angleRotation = Mathf.Atan2(m_moveDir.y, m_moveDir.x) * Mathf.Rad2Deg;
 
             if (m_moveDir.x > 0)
             {
-                angleRotation = Mathf.Clamp(angleRotation, -41, 41);
-                transform.rotation = Quaternion.Euler(0, 0, angleRotation);
                 Flip(Direction.Right);
             }
             else if (m_moveDir.x < 0)
             {
-                float newAngleRotation = angleRotation + 180f;
-                newAngleRotation = Mathf.Clamp(newAngleRotation, 25, 325);
-                transform.rotation = Quaternion.Euler(0, 0, newAngleRotation);
                 Flip(Direction.Left);
             }
         }

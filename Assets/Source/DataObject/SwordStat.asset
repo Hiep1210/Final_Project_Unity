@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 718a8a82dbcd951419962bd1fa640824, type: 3}
-  m_Name: PistolGunStat
+  m_Script: {fileID: 11500000, guid: 1d0037c29e67f3048abd81ce31f831b2, type: 3}
+  m_Name: SwordStat
   m_EditorClassIdentifier: 
   damage: 2
-  timeRate: 0.5
-  recoil: 0
+  timeRate: 1

@@ -7,7 +7,7 @@ using UnityEngine;
 public class Enemy : Actor
 {
     public float distanceMove;
-    
+
     protected StateMachine<EnemyStateAnimator> m_fsmEnemy;
     protected DetectPlayer m_detectPlayer;
     protected EnemyStat m_enemyStat;
@@ -17,7 +17,7 @@ public class Enemy : Actor
     {
         base.Awake();
         m_detectPlayer = gameObject.GetComponent<DetectPlayer>();
-        if(actorStat != null)
+        if (actorStat != null)
         {
             m_enemyStat = actorStat as EnemyStat;
         }
@@ -41,4 +41,30 @@ public class Enemy : Actor
     {
 
     }
+
+    #region FSM - Enemy
+    protected virtual void ActiveCheckingEnemy()
+    {
+       
+    }
+
+    protected virtual void Idle_Enter() { }
+    protected virtual void Idle_Update() { }
+    protected virtual void Idle_Exit() { }
+    protected virtual void Moving_Enter() 
+    {
+        m_currentmoveSpeed = actorStat.moveSpeed;
+    }
+    protected virtual void Moving_Update() { }
+    protected virtual void Moving_Exit() { }
+    protected virtual void Chassing_Enter() { }
+    protected virtual void Chassing_Update() { }
+    protected virtual void Chassing_Exit() { }
+    protected virtual void GotHit_Enter() { }
+    protected virtual void GotHit_Update() { }
+    protected virtual void GotHit_Exit() { }
+    protected virtual void Dead_Enter() { }
+    protected virtual void Dead_Update() { }
+    protected virtual void Dead_Exit() { }
+    #endregion
 }

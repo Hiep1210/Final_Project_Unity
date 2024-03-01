@@ -7,6 +7,7 @@ public class GunWeapon : MonoBehaviour
     public Player player;
     public GunStat gunStat;
     public GameObject bullet;
+    public SpriteRenderer spPlayer;
 
     private Animator m_animator;
     private Vector3 targetMouseDir;
@@ -57,6 +58,16 @@ public class GunWeapon : MonoBehaviour
         {
             transform.localScale = new Vector3(1, 1, 1);
         }
+
+        if (spPlayer.transform.localScale.x > 0)
+        {
+            transform.position = new Vector3(player.transform.position.x - 0.45f, player.transform.position.y + 0.6f, player.transform.position.z + 0f);
+        }
+        else
+        {
+            transform.position = new Vector3(player.transform.position.x + 0.45f, player.transform.position.y + 0.6f, player.transform.position.z + 0f);
+        }
+
     }
 
     private void FireBulletChecking()

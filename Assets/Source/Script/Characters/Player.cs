@@ -12,12 +12,10 @@ public class Player : Actor
     [Range(0, 10f)]
     public float lowScrollMultipiler;
 
-
     private GamepadController m_gPad;
     private PlayerStat m_playerStat;
     private StateMachine<PlayerStateAnimator> m_fsm;
     private PlayerStateAnimator m_previewState;
-
 
     private bool m_isScroll;
     private float m_isScrollTime;
