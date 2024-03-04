@@ -11,6 +11,9 @@ public class Player : Actor
     public float fallScrollMultipiler;
     [Range(0, 10f)]
     public float lowScrollMultipiler;
+    public GameObject lamp;
+    public int numberOfLamp = 5;
+    private List<GameObject> list = new List<GameObject>();
 
     private GamepadController m_gPad;
     private PlayerStat m_playerStat;
@@ -19,6 +22,7 @@ public class Player : Actor
 
     private bool m_isScroll;
     private float m_isScrollTime;
+
 
     
     protected override void Awake()
@@ -37,6 +41,13 @@ public class Player : Actor
     // Start is called before the first frame update
     void Start()
     {
+        while(numberOfLamp > 0)
+        {
+            GameObject lam = Instantiate(lamp);
+            list.Add(lam);
+            lam.SetActive(false);
+            numberOfLamp--;
+        }
         m_gPad = GamepadController.Ins;
     }
 
@@ -52,6 +63,26 @@ public class Player : Actor
         SmoothScroll();
     }
 
+    private void LampChecking()
+    {
+        if (m_gPad.IsPutLamp)
+        {
+            PutLamp();
+        }
+    }
+
+    private void PutLamp()
+    {
+        foreach (GameObject lamp in list)
+        {
+            if(lamp.activeSelf == false)
+            {
+                lamp.SetActive(true);
+                lamp.transform.position = this.transform.position;
+                return;
+            }
+        }
+    }
 
     private void MoveChecking()
     {
@@ -183,6 +214,8 @@ public class Player : Actor
         Helper.PlayAnim(animator, PlayerStateAnimator.Walk.ToString());
 
         MoveChecking();
+
+        LampChecking();
 
         if (m_gPad.IsStatic)
         {

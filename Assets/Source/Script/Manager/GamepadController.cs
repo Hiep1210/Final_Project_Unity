@@ -6,6 +6,7 @@ public class GamepadController : Singleton<GamepadController>
 {
     private bool m_isOnMobile;
     private bool m_isFireBullet;
+    private bool m_isPutLamp;
     private bool m_isSwordAttack;
     private bool m_canMoveLeft;
     private bool m_canMoveRight;
@@ -22,6 +23,7 @@ public class GamepadController : Singleton<GamepadController>
 
 
     public bool IsFireBulletAttack { get => m_isFireBullet; }
+    public bool IsPutLamp {  get => m_isPutLamp; }
     public bool IsSwordAttack { get => m_isSwordAttack; set => m_isSwordAttack = value; }
     public bool CanMoveLeft { get => m_canMoveLeft; }
     public bool CanMoveRight { get => m_canMoveRight; }
@@ -55,6 +57,7 @@ public class GamepadController : Singleton<GamepadController>
             m_isFireBullet = Input.GetMouseButtonDown(0) ? true : false;
             m_isSwordAttack = Input.GetKeyDown(KeyCode.C) ? true : false;
             m_canScroll = Input.GetKeyDown(KeyCode.Space);
+            m_isPutLamp = Input.GetKeyDown(KeyCode.L) ? true : false;
 
             if (m_canScroll)
             {
