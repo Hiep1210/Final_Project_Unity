@@ -17,7 +17,6 @@ MonoBehaviour:
   invincibleTime: 0
   knockBackTime: 0
   forceKnockBack: 0
-  moveDistance: 0
-  movingSpeed: 0
+  movingSpeed: 5
   chassingSpeed: 0
   damage: 0
