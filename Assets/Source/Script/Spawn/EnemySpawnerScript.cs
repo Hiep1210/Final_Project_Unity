@@ -11,7 +11,7 @@ public class EnemySpawnerScript : MonoBehaviour
     public GameObject spawnx;
     int poolsize = 10;
     List<GameObject> list;
-    AutoMoveFree enemyScript;
+    EnemySwordAttack enemyScript;
     float count = 0;
     public SpriteRenderer spriteRenderer;
     private float screenwidth, screenheight;
@@ -65,10 +65,10 @@ public class EnemySpawnerScript : MonoBehaviour
         yield return new WaitForSeconds(3f);
         avai.SetActive(true);
         enemy = avai;
-        enemyScript = enemy.GetComponent<AutoMoveFree>();
+        enemyScript = enemy.GetComponent<EnemySwordAttack>();
         enemy.transform.position = spawn.transform.position;
         GameObject.Destroy(spawn);
-        enemyScript.MoveSpeed = Random.Range(5, 8);
+        enemyScript.actorStat.moveSpeed = Random.Range(5, 8);
     }
 
 }

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: PlayerStat
   m_EditorClassIdentifier: 
   hp: 3
-  moveSpeed: 2
-  damage: 50
+  moveSpeed: 5
+  damage: 2
   invincibleTime: 0
   knockBackTime: 0
   forceKnockBack: 0
