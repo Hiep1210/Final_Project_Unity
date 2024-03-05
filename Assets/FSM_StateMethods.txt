@@ -7,6 +7,9 @@ void Moving_Exit() { }
 void Chassing_Enter() { } 
 void Chassing_Update() { } 
 void Chassing_Exit() { } 
+void Attack_Enter() { } 
+void Attack_Update() { } 
+void Attack_Exit() { } 
 void GotHit_Enter() { } 
 void GotHit_Update() { } 
 void GotHit_Exit() { } 

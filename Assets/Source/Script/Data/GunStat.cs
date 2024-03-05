@@ -5,7 +5,7 @@ using UnityEngine;
 public class GunStat : ScriptableObject
 {
     [Header("Gun Stat: ")]
-    public float damage;
+    public int damage;
     public float timeRate;
     public float recoil;
 }

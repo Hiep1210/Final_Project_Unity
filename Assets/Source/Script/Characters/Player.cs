@@ -35,6 +35,7 @@ public class Player : Actor
 
         m_currentmoveSpeed = m_playerStat.moveSpeed;
         m_isScroll = false;
+
         InitStateFSM();
     }
 
@@ -229,9 +230,6 @@ public class Player : Actor
         }
     }
     void Walk_Exit() { }
-    void Run_Enter() { }
-    void Run_Update() { }
-    void Run_Exit() { }
     void Scroll_Enter() 
     {
         m_currentmoveSpeed = m_playerStat.speedScroll;
@@ -252,12 +250,9 @@ public class Player : Actor
         Helper.PlayAnim(animator, PlayerStateAnimator.Scroll.ToString());
     }
     void Scroll_Exit() { }
-    void SwordAttack_Enter() { }
-    void SwordAttack_Update() { }
-    void SwordAttack_Exit() { }
-    void FireBullet_Enter() { }
-    void FireBullet_Update() { }
-    void FireBullet_Exit() { }
+    void GoHit_Enter() { }
+    void GoHit_Update() { }
+    void GoHit_Exit() { }
     void Dead_Enter() { }
     void Dead_Update() { }
     void Dead_Exit() { }

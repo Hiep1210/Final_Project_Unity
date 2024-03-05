@@ -6,7 +6,8 @@ using UnityEngine;
 public class EnemyStat : ActorStat
 {
     [Header("Enemy-Stat")]
-    public float movingSpeed;
     public float chassingSpeed;
-    public float damage;
+    public float moveSpeedAttack;
+    public float timeChangeStateFirst;
+    public float rateTimeAttack;
 }

@@ -6,6 +6,6 @@ using UnityEngine;
 public class SwordStat : ScriptableObject
 {
     [Header("Sword Stat: ")]
-    public float damage;
+    public int damage;
     public float timeRate;
 }

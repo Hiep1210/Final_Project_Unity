@@ -1,70 +1,67 @@
-using MonsterLove.StateMachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MonsterLove.StateMachine;
+using System.Diagnostics;
+using System;
 
 [RequireComponent(typeof(DetectPlayer))]
 public class Enemy : Actor
 {
-    public float distanceMove;
-
-    protected StateMachine<EnemyStateAnimator> m_fsmEnemy;
     protected DetectPlayer m_detectPlayer;
     protected EnemyStat m_enemyStat;
-    protected Vector3 m_startPos;
+
+    protected StateMachine<EnemyStateAnimator> m_fsmEnemy;
+    protected EnemyStateAnimator m_previewState;
 
     protected override void Awake()
     {
         base.Awake();
-        m_detectPlayer = gameObject.GetComponent<DetectPlayer>();
+        m_detectPlayer = GetComponent<DetectPlayer>();
+
         if (actorStat != null)
         {
             m_enemyStat = actorStat as EnemyStat;
         }
-        m_startPos = transform.position;
+
+        m_currentmoveSpeed = m_enemyStat.moveSpeed;
     }
 
-    protected void InitFSMEnemy(MonoBehaviour behaviour)
+    protected virtual void Start()
     {
-        //FSM_MethodGen.GenAllMethodState<EnemyStateAnimator>();
-        m_fsmEnemy = StateMachine<EnemyStateAnimator>.Initialize(behaviour);
+
+    }
+
+    protected void InitFSMEnemy(MonoBehaviour monoBehaviour)
+    {
+        m_fsmEnemy = StateMachine<EnemyStateAnimator>.Initialize(monoBehaviour);
+        m_fsmEnemy.ChangeState(EnemyStateAnimator.Idle);
+        Invoke("ChangeStateForFirstTime", m_enemyStat.timeChangeStateFirst);
+    }
+
+    protected void ChangeStateForFirstTime()
+    {
         m_fsmEnemy.ChangeState(EnemyStateAnimator.Moving);
     }
 
-    // Update is called once per frame
-    void Update()
+    protected void ChangeState(EnemyStateAnimator newStateChange)
     {
-        MoveChecking();
+        m_previewState = m_fsmEnemy.State;
+        m_fsmEnemy.ChangeState(newStateChange);
     }
 
-    protected virtual void MoveChecking()
+    protected void InvokeChangeStateCo(EnemyStateAnimator newStateChange, float extraTime = 0f)
     {
-
+        StartCoroutine(ChangeStateCo(newStateChange, extraTime));
     }
 
-    #region FSM - Enemy
-    protected virtual void ActiveCheckingEnemy()
+    private IEnumerator ChangeStateCo(EnemyStateAnimator newStateChange, float extraTime = 0f)
     {
-       
+        AnimationClip animationClip = Helper.GetClip(animator, newStateChange.ToString());
+        if (animationClip != null)
+        {
+            yield return new WaitForSeconds(animationClip.length + extraTime);
+        }
+        ChangeState(newStateChange);
     }
-
-    protected virtual void Idle_Enter() { }
-    protected virtual void Idle_Update() { }
-    protected virtual void Idle_Exit() { }
-    protected virtual void Moving_Enter() 
-    {
-        m_currentmoveSpeed = actorStat.moveSpeed;
-    }
-    protected virtual void Moving_Update() { }
-    protected virtual void Moving_Exit() { }
-    protected virtual void Chassing_Enter() { }
-    protected virtual void Chassing_Update() { }
-    protected virtual void Chassing_Exit() { }
-    protected virtual void GotHit_Enter() { }
-    protected virtual void GotHit_Update() { }
-    protected virtual void GotHit_Exit() { }
-    protected virtual void Dead_Enter() { }
-    protected virtual void Dead_Update() { }
-    protected virtual void Dead_Exit() { }
-    #endregion
 }

@@ -8,6 +8,6 @@ using UnityEngine;
 public class PlayerStat : ActorStat
 {
     [Header("Player Stat: ")]
-    public float speedScroll;
+    public int speedScroll;
     public float scrollTimeRate;
 }

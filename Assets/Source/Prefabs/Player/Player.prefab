@@ -564,10 +564,10 @@ MonoBehaviour:
   animator: {fileID: 7461302178107487208}
   spriteRenderer: {fileID: 4626057928015331152}
   capSunCollider: {fileID: 5144172170113102806}
-  normal:
+  normalLayer:
     serializedVersion: 2
     m_Bits: 64
-  invincible:
+  invincibleLayer:
     serializedVersion: 2
     m_Bits: 512
   deadLayer:
