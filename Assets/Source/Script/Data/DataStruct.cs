@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum GameTag
+{
+    Player,
+    Enemy,
+    Ground
+}
+
 public enum Direction
 {
     Left,
@@ -14,10 +21,8 @@ public enum PlayerStateAnimator
 {
     Idle,
     Walk,
-    Run,
     Scroll,
-    SwordAttack,
-    FireBullet,
+    GoHit,
     Dead
 }
 
@@ -26,6 +31,7 @@ public enum EnemyStateAnimator
     Idle,
     Moving,
     Chassing,
+    Attack,
     GotHit,
     Dead
 }

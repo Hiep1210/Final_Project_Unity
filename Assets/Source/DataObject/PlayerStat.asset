@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 3
   moveSpeed: 2
+  damage: 50
   invincibleTime: 0
   knockBackTime: 0
   forceKnockBack: 0

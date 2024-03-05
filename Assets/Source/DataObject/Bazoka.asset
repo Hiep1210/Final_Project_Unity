@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 718a8a82dbcd951419962bd1fa640824, type: 3}
   m_Name: Bazoka
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 5
   timeRate: 1
-  recoil: 0
+  recoil: 20

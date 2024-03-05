@@ -53,7 +53,7 @@ public class GamepadController : Singleton<GamepadController>
             m_canMoveUp = vertCheck > 0 ? true : false;
 
             m_isFireBullet = Input.GetMouseButtonDown(0) ? true : false;
-            m_isSwordAttack = Input.GetKeyDown(KeyCode.C) ? true : false;
+            m_isSwordAttack = Input.GetMouseButtonDown(1) ? true : false;
             m_canScroll = Input.GetKeyDown(KeyCode.Space);
 
             if (m_canScroll)

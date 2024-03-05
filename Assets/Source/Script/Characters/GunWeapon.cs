@@ -6,8 +6,9 @@ public class GunWeapon : MonoBehaviour
 {
     public Player player;
     public GunStat gunStat;
-    public GameObject bullet;
+    public Bullet bullet;
     public SpriteRenderer spPlayer;
+    public Rigidbody2D rbPlayer;
 
     private Animator m_animator;
     private Vector3 targetMouseDir;
@@ -90,13 +91,27 @@ public class GunWeapon : MonoBehaviour
 
         m_animator.SetBool("FireBullet", true);
         Vector3 spawnPos = new Vector3(transform.position.x, transform.position.y + 0.15f, transform.position.z);
-        GameObject bulletClone = Instantiate(bullet, spawnPos, Quaternion.identity);
+        GameObject bulletClone = Instantiate(bullet.gameObject, spawnPos, Quaternion.identity);
         Bullet b = bulletClone.GetComponent<Bullet>();
         b.BulletDir = dir;
+        b.Owner = player;
+        b.Weapon = this;
+
+        rbPlayer.velocity = -gunStat.recoil * dir;
+
+        //if (spPlayer.transform.localScale.x > 0)
+        //{
+        //    rbPlayer.velocity = new Vector2(-gunStat.recoil, rbPlayer.velocity.y);
+        //}
+        //else
+        //{
+        //    rbPlayer.velocity = new Vector2(gunStat.recoil, rbPlayer.velocity.y);
+        //}
     }
 
     private void ResetAttackAnimation()
     {
+        rbPlayer.velocity = Vector2.zero;
         m_animator.SetBool("FireBullet", false);
     }
 

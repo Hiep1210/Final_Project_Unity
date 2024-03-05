@@ -1,78 +1,68 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DetectPlayer : MonoBehaviour
 {
-    public Player targetDetect;
-    public MethodDetect methodDetect;
-    [Header("Setting-OverlapCircle-Detect: ")]
-    public LayerMask layerOverlapCheck;
+    public Player playerTarget;
+
+    public MethodDetect typeDetect;
+
+    [Header("Setting Detect: ")]
+    public LayerMask layerCheck;
     public float radiusCheck;
+    public float radiusLocalCheck;
     public Vector3 offset;
 
-    [Header("Setting-OverlapCircle-Detect: ")]
-    public LayerMask layerRaycastCheck;
-    public float distanceCheck;
+    private bool m_detectChassing;
+    private bool m_detectAttack;
 
-    private bool m_isDetected;
+    public bool DetectChassing { get => m_detectChassing; }
+    public bool DetectAttack { get => m_detectAttack; }
 
-    public bool IsDetected { get => m_isDetected; }
-
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-        DetectPlayerChecking();
-    }
-
-    private void DetectPlayerChecking()
-    {
-        if (targetDetect != null)
+        if (playerTarget != null)
         {
-            if (methodDetect == MethodDetect.Raycast)
-            {
-                Vector3 targetDir = targetDetect.transform.position - transform.position;
-                targetDir.Normalize();
-                RaycastHit2D hit = Physics2D.Raycast(transform.position, targetDir, distanceCheck, layerRaycastCheck);
-                if (hit.collider != null)
-                {
-                    m_isDetected = true;
-                }
-                else
-                {
-                    m_isDetected = false;
-                }
-
-            }
-            else if (methodDetect == MethodDetect.OverlapCircle)
-            {
-                Collider2D col = Physics2D.OverlapCircle(transform.position + offset, radiusCheck, layerOverlapCheck);
-                if (col != null)
-                {
-                    m_isDetected = true;
-                }
-                else
-                {
-                    m_isDetected = false;
-                }
-            }
+            DetectChassingChecking();
+            DetectAttackChecking();
         }
     }
 
+    private void DetectChassingChecking()
+    {
+        Collider2D col = Physics2D.OverlapCircle(transform.position + offset, radiusCheck, layerCheck);
+        if (col != null)
+        {
+            m_detectChassing = true;
+        }
+        else
+        {
+            m_detectChassing = false;
+        }
+    }
+
+    private void DetectAttackChecking()
+    {
+        if (!m_detectChassing) return;
+
+        Collider2D col = Physics2D.OverlapCircle(transform.position + offset, radiusLocalCheck, layerCheck);
+        if (col != null)
+        {
+            m_detectAttack = true;
+        }
+        else
+        {
+            m_detectAttack = false;
+        }
+    }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        if (methodDetect == MethodDetect.OverlapCircle)
-        {
-            Gizmos.DrawWireSphere(transform.position + offset, radiusCheck);
-        }
-        else if (methodDetect == MethodDetect.Raycast)
-        {
-            Vector3 targetDir = targetDetect.transform.position - transform.position;
-            targetDir.Normalize();
-            Vector3 endPos = transform.position + (targetDir * distanceCheck);
-            Gizmos.DrawLine(transform.position, endPos);
-        }
+        Gizmos.DrawWireSphere(transform.position + offset, radiusCheck);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position + offset, radiusLocalCheck);
     }
 }
