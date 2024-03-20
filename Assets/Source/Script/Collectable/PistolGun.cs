@@ -91,8 +91,8 @@ public class PistolGun : MonoBehaviour
     {
         if (GamepadController.Ins.IsFreeBullet && !m_isAttacked)
         {
-            FireBullet();
             m_isAttacked = true;
+            FireBullet();
         }
 
         if (m_isAttacked)
@@ -114,7 +114,7 @@ public class PistolGun : MonoBehaviour
             GameObject bulletClone = GameObject.Instantiate(pistolBulletPrefabs, bulletSpawnPos.position, Quaternion.identity);
             PistolBullet pistolBullet = bulletClone.gameObject.GetComponent<PistolBullet>();
             pistolBullet.GunObj = gameObject;
-            Rigidbody2D rb = pistolBullet.GetComponent<Rigidbody2D>();
+            //Rigidbody2D rb = pistolBullet.GetComponent<Rigidbody2D>();
             //rb.AddForce(transform.right * gunPistolStat.bulletForce, ForceMode2D.Impulse);      
         }
     }
