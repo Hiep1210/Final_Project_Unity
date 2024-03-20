@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Enemy
   - Collectable
+  - PistolBullet
+  - MachineBullet
+  - ShotBullet
   layers:
   - Default
   - TransparentFX
@@ -15,7 +18,7 @@ TagManager:
   - UI
   - Player
   - Enemy
-  - Dead
+  - Death
   - Invincible
   - Ground
   - 
@@ -48,6 +51,9 @@ TagManager:
     locked: 0
   - name: Enemy
     uniqueID: 3085955453
+    locked: 0
+  - name: Bullet
+    uniqueID: 1171427085
     locked: 0
   - name: Player
     uniqueID: 1913621205

@@ -12,11 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcfcd380d9cacd7408daae5d48e84577, type: 3}
   m_Name: PlayerStat
   m_EditorClassIdentifier: 
-  hp: 3
-  moveSpeed: 5
-  damage: 2
-  invincibleTime: 0
-  knockBackTime: 0
-  forceKnockBack: 0
-  speedScroll: 10
-  scrollTimeRate: 5
+  Hp: 100
+  MoveSpeed: 8
+  Damage: 2
+  RollSpeed: 10
+  RollRateTime: 2
