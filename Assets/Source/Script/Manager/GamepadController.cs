@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GamepadController : Singleton<GamepadController>
 {
-    public Player m_player;
+    private Player m_player;
 
     private bool m_isPutLamp;
     private bool m_canMoveLeft;

@@ -16,4 +16,4 @@ MonoBehaviour:
   flyBulletSpeed: 20
   bulletForce: 5
   recoil: 5
-  rateTimeFireBullet: 0
+  rateTimeFireBullet: 0.5

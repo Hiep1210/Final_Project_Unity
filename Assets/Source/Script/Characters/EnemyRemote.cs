@@ -32,6 +32,17 @@ public class EnemyRemote : Actor
     [Header("Bullet Remote Enemy: ")]
     public GameObject bulletRemoteEnemyPrefabs;
 
+    private float m_curSpeedStat;
+    private float m_curChassingStat;
+    private float m_curAttackRate;
+    private float m_curFlySpeedBulletStat;
+
+    public float CurSpeedStat { get => m_curSpeedStat; set => m_curSpeedStat = value; }
+    public float CurChassingStat { get => m_curChassingStat; set => m_curChassingStat = value; }
+    public float CurAttackRate { get => m_curAttackRate; set => m_curAttackRate = value; }
+    public RemoteEnemyStat RemoteEnemyStat { get => m_remoteEnemyStat; set => m_remoteEnemyStat = value; }
+    public float CurFlySpeedBulletStat { get => m_curFlySpeedBulletStat; set => m_curFlySpeedBulletStat = value; }
+
     protected override void Awake()
     {
         base.Awake();
@@ -42,6 +53,11 @@ public class EnemyRemote : Actor
         if (actorStat != null)
         {
             m_remoteEnemyStat = actorStat as RemoteEnemyStat;
+
+            m_curSpeedStat = m_remoteEnemyStat.MoveSpeed;
+            m_curChassingStat = m_remoteEnemyStat.ChassingSpeed;
+            m_curAttackRate = m_remoteEnemyStat.AttackRate;
+            m_curFlySpeedBulletStat = m_remoteEnemyStat.bulletFlySpeed;
         }
 
         InitEnemyRemoteFSM();
@@ -53,8 +69,6 @@ public class EnemyRemote : Actor
 
     private void Update()
     {
-        Debug.Log("Current Hp Enemy: " + m_currentHp);
-
         if (!m_isStartState)
         {
             m_currentTimeState -= Time.deltaTime;
@@ -70,7 +84,7 @@ public class EnemyRemote : Actor
 
             if (m_isAttacked)
             {
-                ReduceTimeAction(ref m_isAttacked, ref m_currTimeAttack, m_remoteEnemyStat.AttackRate);
+                ReduceTimeAction(ref m_isAttacked, ref m_currTimeAttack, m_curAttackRate);
             }
         }
     }
@@ -85,8 +99,6 @@ public class EnemyRemote : Actor
 
     private void MoveChecking()
     {
-
-
         Vector3 dir = transform.position - m_autoMoveFree.Player.transform.position;
 
         m_hozDir = dir.normalized.x > 0 ? 1 : -1;
@@ -150,7 +162,7 @@ public class EnemyRemote : Actor
 
                 bullet.Player = m_autoMoveFree.Player;
 
-                bullet.FlySpeed = m_remoteEnemyStat.bulletFlySpeed;
+                bullet.FlySpeed = m_curFlySpeedBulletStat;
             }
 
             ChangeState(StateAnimatorEnemy.Hit);
@@ -160,7 +172,7 @@ public class EnemyRemote : Actor
         }
         else
         {
-            ReduceTimeAction(ref m_isAttacked, ref m_currTimeAttack, m_remoteEnemyStat.AttackRate);
+            ReduceTimeAction(ref m_isAttacked, ref m_currTimeAttack, m_curAttackRate);
             m_isHit = false;
         }
     }
@@ -211,7 +223,7 @@ public class EnemyRemote : Actor
     {
 
         m_rb.velocity = Vector2.zero;
-        m_currentSpeed = m_remoteEnemyStat.MoveSpeed;
+        m_currentSpeed = m_curSpeedStat;
         m_autoMoveFree.MoveSpeed = m_currentSpeed;
     }
     void Idle_Update()
@@ -221,14 +233,14 @@ public class EnemyRemote : Actor
     void Idle_Exit() { }
     void Fly_Enter()
     {
-        m_currentSpeed = m_remoteEnemyStat.MoveSpeed;
+        m_currentSpeed = m_curSpeedStat;
         m_autoMoveFree.MoveSpeed = m_currentSpeed;
     }
     void Fly_Update() { Helper.PlayAnim(animator, StateAnimatorEnemy.Fly.ToString()); }
     void Fly_Exit() { }
     void Chassing_Enter()
     {
-        m_currentSpeed = m_remoteEnemyStat.ChassingSpeed;
+        m_currentSpeed = m_curChassingStat;
         m_autoMoveFree.MoveSpeed = m_currentSpeed;
     }
     void Chassing_Update() { Helper.PlayAnim(animator, StateAnimatorEnemy.Chassing.ToString()); }
@@ -240,14 +252,17 @@ public class EnemyRemote : Actor
     void Death_Update()
     {
         Helper.PlayAnim(animator, StateAnimatorEnemy.Death.ToString());
+
         m_rb.velocity = Vector2.zero;
+
         if(deadVfx != null)
         {
             GameObject deadVfxClone = GameObject.Instantiate(deadVfx, transform.position, Quaternion.identity);
             Destroy(deadVfxClone, 0.15f);
-            gameObject.SetActive(false);
-            Destroy(gameObject, 0.15f);
         }
+
+        gameObject.SetActive(false);
+        Destroy(gameObject, 0.15f);
     }
     void Death_Exit() { }
     #endregion

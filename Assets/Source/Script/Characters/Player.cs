@@ -28,7 +28,7 @@ public class Player : Actor
 
         InitPlayerFSM();
 
-       
+
     }
 
     private void Update()
@@ -198,9 +198,12 @@ public class Player : Actor
     void Death_Update()
     {
         Helper.PlayAnim(animator, StateAnimtorPlayer.Death.ToString());
+        if (deadVfx != null)
+        {
+            GameObject deadVfxClone = GameObject.Instantiate(deadVfx, transform.position, Quaternion.identity);
+            Destroy(deadVfxClone, 0.15f);
+        }
         gameObject.SetActive(false);
-        GameObject deadVfxClone = GameObject.Instantiate(deadVfx, transform.position, Quaternion.identity);
-        Destroy(deadVfxClone, 0.15f);
     }
     void Death_Exit() { }
 

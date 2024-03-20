@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerStat
   m_EditorClassIdentifier: 
   Hp: 100
-  MoveSpeed: 8
+  MoveSpeed: 20
   Damage: 2
-  RollSpeed: 10
+  RollSpeed: 25
   RollRateTime: 2

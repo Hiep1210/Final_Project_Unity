@@ -24,9 +24,9 @@ public class Actor : MonoBehaviour
     protected Rigidbody2D m_rb;
     protected int m_hozDir;
     protected int m_vertDir;
-    protected int m_currentHp;
+    protected float m_currentHp;
     protected float m_currentSpeed;
-    protected int m_currentDamage;
+    protected float m_currentDamage;
 
     protected Actor m_whoHit;
 
@@ -35,6 +35,10 @@ public class Actor : MonoBehaviour
     protected bool m_isInvincible;
 
     public bool IsDeadActor { get => m_isDead; set => m_isDead = value; }
+
+    public float CurrentHp { get => m_currentHp; set => m_currentHp = value; }
+    public float CurrentDamage { get => m_currentDamage; set => m_currentDamage = value; }
+    public float CurrentMoveSpeed { get => m_currentSpeed; set => m_currentSpeed = value; }
 
     protected virtual void Awake()
     {
@@ -49,7 +53,7 @@ public class Actor : MonoBehaviour
     }
 
 
-    public void TakeDamage(object whoHit, int damage)
+    public void TakeDamage(object whoHit, float damage)
     {
         if (whoHit != null && m_currentHp > 0)
         {

@@ -18,9 +18,7 @@ public class WeaponManager : Singleton<WeaponManager>
     {
         MakeSingleton(false);
 
-        _isPistolGunActive = true;
-        _isMachineGunActive = false;
-        _isShotGunActive = false;
+        InitDataSetActive();
     }
 
 
@@ -56,5 +54,19 @@ public class WeaponManager : Singleton<WeaponManager>
                 gunWeaponList[2].gameObject.SetActive(true);
             }
         }
+    }
+
+    private void InitDataSetActive()
+    {
+
+        _isPistolGunActive = true;
+        _isMachineGunActive = true;
+        _isShotGunActive = true;
+
+        if (gunWeaponList == null || gunWeaponList.Count < 0) return;
+
+        gunWeaponList[0].gameObject.SetActive(true);
+        gunWeaponList[1].gameObject.SetActive(false);
+        gunWeaponList[2].gameObject.SetActive(false);
     }
 }

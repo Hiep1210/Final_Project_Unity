@@ -22,12 +22,20 @@ public class EnemyClose : Actor
 
     private float m_currTimeAttack;
 
-
     private bool m_isStartState;
 
     private float m_currentTimeState;
 
     private float m_rateStartState;
+
+    private float m_curSpeedStat;
+    private float m_curChassingStat;
+    private float m_curAttackRate;
+
+    public float CurMoveSpeedStat { get => m_curSpeedStat; set => m_curSpeedStat = value; }
+    public float CurChassingStat { get => m_curChassingStat; set => m_curChassingStat = value; }
+    public CloseEnemyStat CloseEnemyStat { get => m_closeEnemyStat; set => m_closeEnemyStat = value; }
+    public float CurAttackRate { get => m_curAttackRate; set => m_curAttackRate = value; }
 
     protected override void Awake()
     {
@@ -39,6 +47,10 @@ public class EnemyClose : Actor
         if (actorStat != null)
         {
             m_closeEnemyStat = actorStat as CloseEnemyStat;
+
+            m_curSpeedStat = m_closeEnemyStat.MoveSpeed;
+            m_curChassingStat = m_closeEnemyStat.ChassingSpeed;
+            m_curAttackRate = m_closeEnemyStat.AttackRate;
         }
 
         //FSM_MethodGen.GenAllMethodState<StateAnimatorEnemy>();
@@ -51,8 +63,6 @@ public class EnemyClose : Actor
 
     private void Update()
     {
-        Debug.Log("Current Hp Enemy: " + m_currentHp);
-
         if (!m_isStartState)
         {
             m_currentTimeState -= Time.deltaTime;
@@ -68,7 +78,7 @@ public class EnemyClose : Actor
 
             if (m_isAttacked)
             {
-                ReduceTimeAction(ref m_isAttacked, ref m_currTimeAttack, m_closeEnemyStat.AttackRate);
+                ReduceTimeAction(ref m_isAttacked, ref m_currTimeAttack, m_curAttackRate);
             }
         }
 
@@ -211,7 +221,7 @@ public class EnemyClose : Actor
     void Idle_Enter()
     {
         m_rb.velocity = Vector2.zero;
-        m_currentSpeed = m_closeEnemyStat.MoveSpeed;
+        m_currentSpeed = m_curSpeedStat;
         m_autoMoveFree.MoveSpeed = m_currentSpeed;
     }
     void Idle_Update()
@@ -229,7 +239,7 @@ public class EnemyClose : Actor
     }
     void Walk_Enter()
     {
-        m_currentSpeed = m_closeEnemyStat.MoveSpeed;
+        m_currentSpeed = m_curSpeedStat;
         m_autoMoveFree.MoveSpeed = m_currentSpeed;
     }
     void Walk_Update()
@@ -239,7 +249,7 @@ public class EnemyClose : Actor
     void Walk_Exit() { }
     void Chassing_Enter()
     {
-        m_currentSpeed = m_closeEnemyStat.ChassingSpeed;
+        m_currentSpeed = m_curChassingStat;
         m_autoMoveFree.MoveSpeed = m_currentSpeed;
     }
     void Chassing_Update()
@@ -257,14 +267,17 @@ public class EnemyClose : Actor
     void Death_Update()
     {
         Helper.PlayAnim(animator, StateAnimatorEnemy.Death.ToString());
+
         m_rb.velocity = Vector2.zero;
+
         if(deadVfx != null)
         {
             GameObject deadVfxClone = GameObject.Instantiate(deadVfx, transform.position, Quaternion.identity);
             Destroy(deadVfxClone, 0.15f);
-            gameObject.SetActive(false);
-            Destroy(gameObject, 0.15f);
         }
+
+        gameObject.SetActive(false);
+        Destroy(gameObject, 0.15f);
     }
     void Death_Exit() { }
 

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 01_Enemy
   m_EditorClassIdentifier: 
   Hp: 50
-  MoveSpeed: 3
+  MoveSpeed: 10
   Damage: 2
-  ChassingSpeed: 6
+  ChassingSpeed: 15
   AttackRate: 2
   StartStateRate: 1
