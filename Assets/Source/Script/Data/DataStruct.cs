@@ -6,7 +6,12 @@ public enum GameTag
 {
     Player,
     Enemy,
-    Ground
+    Collectable
+}
+
+public enum GameLayer
+{
+
 }
 
 public enum Direction
@@ -14,30 +19,26 @@ public enum Direction
     Left,
     Right,
     Up,
-    Down
+    Down,
+    None
 }
 
-public enum PlayerStateAnimator
+public enum StateAnimtorPlayer
 {
     Idle,
     Walk,
-    Scroll,
-    GoHit,
-    Dead
+    Death,
+    Roll,
+    Scour
 }
 
-public enum EnemyStateAnimator
+public enum StateAnimatorEnemy
 {
     Idle,
-    Moving,
+    Walk,
     Chassing,
-    Attack,
-    GotHit,
-    Dead
+    Hit,
+    Death,
+    Fly
 }
 
-public enum MethodDetect
-{
-    OverlapCircle,
-    Raycast
-}

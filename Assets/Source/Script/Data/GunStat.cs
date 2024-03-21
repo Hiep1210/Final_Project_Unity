@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class GunStat : ScriptableObject
 {
-    [Header("Gun Stat: ")]
     public int damage;
-    public float timeRate;
+    public float flyBulletSpeed;
+    public float bulletForce;
     public float recoil;
+    public float rateTimeFireBullet;
+    public int countBullet;
 }

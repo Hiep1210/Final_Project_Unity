@@ -3,227 +3,213 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
 public class Player : Actor
 {
-    [Header("Smooth Scroll: ")]
-    [Range(0,10f)]
-    public float fallScrollMultipiler;
-    [Range(0, 10f)]
-    public float lowScrollMultipiler;
-
-    private GamepadController m_gPad;
     private PlayerStat m_playerStat;
-    private StateMachine<PlayerStateAnimator> m_fsm;
-    private PlayerStateAnimator m_previewState;
 
-    private bool m_isScroll;
-    private float m_isScrollTime;
+    private StateMachine<StateAnimtorPlayer> m_playerFSM;
 
+    private StateAnimtorPlayer m_previewState;
+
+    private bool m_isRoll;
+    private float m_currentTimeResetActionRoll;
+    private float m_maxHp;
+
+    public bool IsRoll { get => m_isRoll; }
+    public float CurrentTimeResetActionRoll { get => m_currentTimeResetActionRoll; }
+    public float MaxHp { get => m_maxHp; set => m_maxHp = value; }
     
+
     protected override void Awake()
     {
         base.Awake();
+
         if (actorStat != null)
         {
             m_playerStat = actorStat as PlayerStat;
         }
 
-        m_currentmoveSpeed = m_playerStat.moveSpeed;
-        m_isScroll = false;
+        InitPlayerFSM();
 
-        InitStateFSM();
+        MaxHp = m_playerStat.Hp;
+        m_currentHp = MaxHp;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Update()
     {
-        m_gPad = GamepadController.Ins;
+        ReduceTimeAction(ref m_isRoll, ref m_currentTimeResetActionRoll, m_playerStat.RollRateTime);
+
+        Debug.Log("Current Hp Player: " + m_currentHp);
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Moving(Direction direction)
     {
-        if (IsDead) return;
-        ReduceActionTime(ref m_isScroll,ref m_isScrollTime, m_playerStat.scrollTimeRate);
-    }
+        FlipFollowDirection(direction);
 
-    private void FixedUpdate()
-    {
-        SmoothScroll();
-    }
-
-
-    private void MoveChecking()
-    {
-        if (m_gPad.IsStatic)
+        if (direction == Direction.Left || direction == Direction.Right)
         {
-            m_rb.velocity = Vector2.zero;
-            return;
+            m_hozDir = direction == Direction.Left ? -1 : 1;
+            m_rb.velocity = new Vector2(m_hozDir * m_currentSpeed, m_rb.velocity.y);
         }
 
-        if (m_gPad.CanMoveLeft)
+        if (direction == Direction.Up || direction == Direction.Down)
+        {
+            m_vertDir = direction == Direction.Up ? 1 : -1;
+            m_rb.velocity = new Vector2(m_rb.velocity.x, m_currentSpeed * m_vertDir);
+        }
+    }
+
+    public void MoveHozChecking()
+    {
+        if (GamepadController.Ins.CanMoveLeft)
         {
             Moving(Direction.Left);
         }
 
-        if (m_gPad.CanMoveRight)
+        if (GamepadController.Ins.CanMoveRight)
         {
             Moving(Direction.Right);
         }
+    }
 
-        if (m_gPad.CanMoveUp)
+    public void MoveVerChecking()
+    {
+        if (GamepadController.Ins.CanMoveUp)
         {
             Moving(Direction.Up);
         }
 
-        if (m_gPad.CanMoveDown)
+        if (GamepadController.Ins.CanMoveDown)
         {
             Moving(Direction.Down);
         }
     }
 
-    private void Moving(Direction direction)
+    protected override void IsDead()
     {
-        if (direction != Direction.Up && direction != Direction.Down)
-        {
-            FlipCharacters(direction);
-        }
+        base.IsDead();
 
-        if (direction == Direction.Left || direction == Direction.Right)
-        {
-            m_horizontal = direction == Direction.Left ? -1 : 1;
-            m_rb.velocity = new Vector2(m_horizontal * m_currentmoveSpeed, m_rb.velocity.y);
-        }
-
-        if (direction == Direction.Up || direction == Direction.Down)
-        {
-            m_vertical = direction == Direction.Down ? -1 : 1;
-            m_rb.velocity = new Vector2(m_rb.velocity.x, m_vertical * m_currentmoveSpeed);
-        }
-    }
-
-    private void Scroll()
-    {
-        float dir = spriteRenderer.transform.localScale.x > 0 ? 1 : -1;
-        m_rb.velocity = new Vector2(dir * m_currentmoveSpeed, m_rb.velocity.y);
-    }
-
-    private void SmoothScroll()
-    {
-        if (m_fsm.State == PlayerStateAnimator.Scroll)
-        {
-            Vector2 dir = spriteRenderer.transform.localScale.x > 0 ? Vector2.right : Vector2.left;
-
-            if (m_rb.velocity.y < 0)
-            {
-                m_rb.velocity += dir * Physics2D.gravity.x * (1 - fallScrollMultipiler) * Time.deltaTime;
-            }
-
-            if (m_rb.velocity.x > 0 && !m_gPad.IsScrollHolding)
-            {
-                m_rb.velocity += dir * Physics2D.gravity.x * (1 - lowScrollMultipiler) * Time.deltaTime;
-            }
-        }
+        ChangeState(StateAnimtorPlayer.Death);
     }
 
 
     #region FSM - Player
-    protected virtual void InitStateFSM()
+
+    private void ActiveState()
     {
-        m_fsm = StateMachine<PlayerStateAnimator>.Initialize(this);
-        m_fsm.ChangeState(PlayerStateAnimator.Idle);
+
     }
 
-    private void ChangeState(PlayerStateAnimator newStateChange)
+    private void InitPlayerFSM()
     {
-        m_previewState = m_fsm.State;
-        m_fsm.ChangeState(newStateChange);
+        //FSM_MethodGen.GenAllMethodState<StateAnimtorPlayer>();
+
+        m_playerFSM = StateMachine<StateAnimtorPlayer>.Initialize(this);
+
+        m_playerFSM.ChangeState(StateAnimtorPlayer.Idle);
     }
 
-    private void InvokeChangeStateCo(PlayerStateAnimator newStateChange, float extraTime = 0f)
-    {
-        StartCoroutine(ChangeStateCo(newStateChange, extraTime));
-    }
 
-    private IEnumerator ChangeStateCo(PlayerStateAnimator newStateChange, float extraTime = 0f)
+    private void ChangeState(StateAnimtorPlayer newStateAnimatorPlayer)
     {
-        AnimationClip animationClip = Helper.GetClip(animator, newStateChange.ToString());
-        if (animationClip != null)
-        {
-            yield return new WaitForSeconds(animationClip.length + extraTime);
-        }
-        ChangeState(newStateChange);
+        m_previewState = m_playerFSM.State;
+        m_playerFSM.ChangeState(newStateAnimatorPlayer);
     }
 
     void Idle_Enter()
     {
-        m_currentmoveSpeed = m_playerStat.moveSpeed;
-        m_rb.velocity = Vector2.zero;
+        m_currentSpeed = m_playerStat.MoveSpeed;
+        m_rb.velocity = Vector3.zero;
     }
     void Idle_Update()
     {
-        Helper.PlayAnim(animator, PlayerStateAnimator.Idle.ToString());
-        if (m_gPad.CanMoveLeft || m_gPad.CanMoveRight || m_gPad.CanMoveUp || m_gPad.CanMoveDown)
+        Helper.PlayAnim(animator, StateAnimtorPlayer.Idle.ToString());
+
+        if (GamepadController.Ins.CanMoveLeft || GamepadController.Ins.CanMoveRight)
         {
-            ChangeState(PlayerStateAnimator.Walk);
+            MoveHozChecking();
+            ChangeState(StateAnimtorPlayer.Walk);
         }
 
-        if (m_gPad.CanScroll && m_gPad && !m_isScroll)
+        if (GamepadController.Ins.CanMoveUp || GamepadController.Ins.CanMoveDown)
         {
-            ChangeState(PlayerStateAnimator.Scroll);
+            MoveVerChecking();
+            ChangeState(StateAnimtorPlayer.Walk);
+        }
+
+        if (GamepadController.Ins.IsRoll && !m_isRoll)
+        {
+            ChangeState(StateAnimtorPlayer.Roll);
         }
     }
     void Idle_Exit() { }
+
     void Walk_Enter()
     {
-        m_currentmoveSpeed = m_playerStat.moveSpeed;
+        m_currentSpeed = m_playerStat.MoveSpeed;
     }
     void Walk_Update()
     {
-        Helper.PlayAnim(animator, PlayerStateAnimator.Walk.ToString());
+        Helper.PlayAnim(animator, StateAnimtorPlayer.Walk.ToString());
 
-        MoveChecking();
+        MoveHozChecking();
+        MoveVerChecking();
 
-        if (m_gPad.IsStatic)
+        if (GamepadController.Ins.IsStatic)
         {
-            ChangeState(PlayerStateAnimator.Idle);
+            ChangeState(StateAnimtorPlayer.Idle);
         }
 
-
-        if (m_gPad.CanScroll && m_gPad && !m_isScroll)
+        if (GamepadController.Ins.IsRoll && !m_isRoll)
         {
-            ChangeState(PlayerStateAnimator.Scroll);
+            ChangeState(StateAnimtorPlayer.Roll);
         }
     }
     void Walk_Exit() { }
-    void Scroll_Enter() 
-    {
-        m_currentmoveSpeed = m_playerStat.speedScroll;
-        m_isScroll = true;
-        Scroll();
-        if (m_gPad.IsStatic)
-        {
-            InvokeChangeStateCo(PlayerStateAnimator.Idle);
-        }
 
-        if (m_gPad.CanMoveLeft || m_gPad.CanMoveRight || m_gPad.CanMoveUp || m_gPad.CanMoveDown)
+    void Roll_Enter()
+    {
+        m_currentSpeed = m_playerStat.RollSpeed;
+    }
+    void Roll_Update()
+    {
+        Helper.PlayAnim(animator, StateAnimtorPlayer.Roll.ToString());
+
+        m_isRoll = true;
+
+        MoveHozChecking();
+        MoveVerChecking();
+
+        if (GamepadController.Ins.IsStatic)
         {
-            InvokeChangeStateCo(PlayerStateAnimator.Walk);
+            ChangeState(StateAnimtorPlayer.Idle);
         }
     }
-    void Scroll_Update() 
+    void Roll_Exit() { }
+
+    void Scour_Enter()
     {
-        Helper.PlayAnim(animator, PlayerStateAnimator.Scroll.ToString());
     }
-    void Scroll_Exit() { }
-    void GoHit_Enter() { }
-    void GoHit_Update() { }
-    void GoHit_Exit() { }
-    void Dead_Enter() { }
-    void Dead_Update() { }
-    void Dead_Exit() { }
+
+    void Scour_Update()
+    {
+        Helper.PlayAnim(animator, StateAnimtorPlayer.Scour.ToString());
+    }
+    void Scour_Exit() { }
+
+    void Death_Enter() { }
+    void Death_Update()
+    {
+        Helper.PlayAnim(animator, StateAnimtorPlayer.Death.ToString());
+        if (deadVfx != null)
+        {
+            GameObject deadVfxClone = GameObject.Instantiate(deadVfx, transform.position, Quaternion.identity);
+            Destroy(deadVfxClone, 0.15f);
+        }
+        gameObject.SetActive(false);
+    }
+    void Death_Exit() { }
 
     #endregion
-
 }

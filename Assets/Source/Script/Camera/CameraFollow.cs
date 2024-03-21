@@ -10,13 +10,14 @@ public class CameraFollow : MonoBehaviour
     public Vector3 offset;
 
     [SerializeField]
-    private float leftLimit;
-    [SerializeField]
     private float rightLimit;
     [SerializeField]
-    private float bottomLimit;
+    private float leftLimit;
     [SerializeField]
     private float topLimit;
+    [SerializeField]
+    private float bottomLimit;
+
     [Range(1, 10)]
     public float smoothFactor;
     private bool m_isHozStuck;
