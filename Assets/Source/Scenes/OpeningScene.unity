@@ -1444,7 +1444,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 584, y: 314}
+  m_AnchoredPosition: {x: 667, y: 233}
   m_SizeDelta: {x: 265.885, y: 93.027}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1823504533
@@ -1493,7 +1493,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 438568446}
         m_TargetAssemblyTypeName: LoadScene, Assembly-CSharp
-        m_MethodName: LoadMainGamePlay
+        m_MethodName: skipButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
