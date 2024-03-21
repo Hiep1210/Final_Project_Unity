@@ -31,9 +31,10 @@ public class AutoMoveFree : MonoBehaviour
         m_rb = GetComponent<Rigidbody2D>();
 
         m_player = GameObject.FindObjectOfType<Player>();
-
-        m_destination = m_player.transform.position;
-
+        if(m_player != null)
+        {
+            m_destination = m_player.transform.position;
+        }
     }
 
     private void Update()

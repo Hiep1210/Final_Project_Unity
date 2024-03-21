@@ -9,4 +9,6 @@ public class RemoteEnemyStat : ActorStat
     public float AttackRate;
     public float StartStateRate;
     public float bulletFlySpeed;
+    public int minScore;
+    public int maxScore;
 }

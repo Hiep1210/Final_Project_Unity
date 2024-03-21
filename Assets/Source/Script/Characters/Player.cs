@@ -13,9 +13,12 @@ public class Player : Actor
 
     private bool m_isRoll;
     private float m_currentTimeResetActionRoll;
+    private float m_maxHp;
 
     public bool IsRoll { get => m_isRoll; }
     public float CurrentTimeResetActionRoll { get => m_currentTimeResetActionRoll; }
+    public float MaxHp { get => m_maxHp; set => m_maxHp = value; }
+    
 
     protected override void Awake()
     {
@@ -28,7 +31,8 @@ public class Player : Actor
 
         InitPlayerFSM();
 
-
+        MaxHp = m_playerStat.Hp;
+        m_currentHp = MaxHp;
     }
 
     private void Update()

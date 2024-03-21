@@ -21,12 +21,16 @@ public class ShotGun : MonoBehaviour
     private bool m_isAttacked;
     private float m_currTimeAttack;
 
+    private int m_countBullet;
+    public int CountBullet { get => m_countBullet; set => m_countBullet = value; }
     private void Awake()
     {
         m_player = playerGameObject.gameObject.GetComponent<Player>();
         m_gunSp = GetComponent<SpriteRenderer>();
 
         m_gunSp.sortingOrder = 3;
+
+        m_countBullet = shotGunStat.countBullet;
     }
 
     // Update is called once per frame
@@ -88,15 +92,15 @@ public class ShotGun : MonoBehaviour
 
     private void FireBulletGunChecking()
     {
-        if (GamepadController.Ins.IsFreeBullet && !m_isAttacked)
-        {
-            m_isAttacked = true;
-            FireBullet();
-        }
-
         if (m_isAttacked)
         {
             m_player.ReduceTimeAction(ref m_isAttacked, ref m_currTimeAttack, shotGunStat.rateTimeFireBullet);
+        }
+
+        if (GamepadController.Ins.IsFreeBullet && !m_isAttacked && m_countBullet > 0)
+        {
+            m_isAttacked = true;
+            FireBullet();
         }
     }
 
@@ -125,6 +129,8 @@ public class ShotGun : MonoBehaviour
             ShotBullet shotBullet3 = bulletClone3.gameObject.GetComponent<ShotBullet>();
             shotBullet3.GunObj = gameObject;
             shotBullet3.IndexBullet = 3;
+
+            m_countBullet -= 1;
         }
     }
 }

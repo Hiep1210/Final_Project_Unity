@@ -27,7 +27,7 @@ public class ShotBullet : MonoBehaviour
         m_circleCollider = GetComponent<CircleCollider2D>();
 
         m_rb.isKinematic = true;
-        m_circleCollider.isTrigger = true;
+        //m_circleCollider.isTrigger = true;
 
         m_shotGun = m_gunObj.gameObject.GetComponent<ShotGun>();
 
@@ -67,17 +67,37 @@ public class ShotBullet : MonoBehaviour
         transform.position = newPosition;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag(GameTag.Enemy.ToString()))
-        {
-            Actor enemyActor = collision.GetComponent<Actor>();
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.CompareTag(GameTag.Enemy.ToString()))
+    //    {
+    //        Actor enemyActor = collision.GetComponent<Actor>();
 
-            if (enemyActor != null)
+    //        if (enemyActor != null)
+    //        {
+    //            enemyActor.TakeDamage(m_shotGun, m_shotGun.shotGunStat.damage);
+    //            //gameObject.SetActive(false);
+    //        }
+    //    }
+    //}
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag(GameTag.Enemy.ToString()))
+        {
+            Actor actorEnemy = collision.gameObject.GetComponent<Actor>();
+
+            if (actorEnemy != null)
             {
-                enemyActor.TakeDamage(m_shotGun, m_shotGun.shotGunStat.damage);
-                gameObject.SetActive(false);
+                Vector3 enemyToBulletDir = transform.position - actorEnemy.transform.position;
+                enemyToBulletDir.Normalize();
+
+                actorEnemy.Rb2D.velocity -= (Vector2)enemyToBulletDir * m_shotGun.shotGunStat.recoil;
+
+                actorEnemy.TakeDamage(m_shotGun, m_shotGun.shotGunStat.damage);
+
             }
+            
         }
     }
 }

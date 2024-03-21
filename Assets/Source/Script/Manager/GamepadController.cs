@@ -64,7 +64,7 @@ public class GamepadController : Singleton<GamepadController>
 
             m_isRoll = Input.GetKey(KeyCode.Space);
 
-            m_isFreeBullet = Input.GetMouseButtonDown(0);
+            m_isFreeBullet = Input.GetMouseButtonDown(0) ? true : false;
 
             if (!m_canMoveLeft && !m_canMoveRight && !m_canMoveDown && !m_canMoveUp && !m_isRoll && !m_isScour)
             {

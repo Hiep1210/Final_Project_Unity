@@ -49,6 +49,9 @@ TagManager:
   - name: Front
     uniqueID: 1159044957
     locked: 0
+  - name: Collectable
+    uniqueID: 1551552039
+    locked: 0
   - name: Enemy
     uniqueID: 3085955453
     locked: 0

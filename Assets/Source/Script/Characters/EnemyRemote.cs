@@ -7,6 +7,8 @@ using UnityEngine;
 [RequireComponent(typeof(DetectTarget))]
 public class EnemyRemote : Actor
 {
+    public List<Collectable> collectablesPrefabs;
+
     private AutoMoveFree m_autoMoveFree;
 
     private DetectTarget m_detectTarget;
@@ -91,7 +93,7 @@ public class EnemyRemote : Actor
 
     public void FixedUpdate()
     {
-        if (m_isStartState && !IsDeadActor)
+        if (m_isStartState && !IsDeadActor && m_autoMoveFree.Player != null)
         {
             MoveChecking();
         }
@@ -253,12 +255,35 @@ public class EnemyRemote : Actor
     {
         Helper.PlayAnim(animator, StateAnimatorEnemy.Death.ToString());
 
+        int score = Random.Range(m_remoteEnemyStat.minScore, m_remoteEnemyStat.maxScore);
+        GameManager.Ins.Score += score;
+        GameManager.Ins.CountKillEnemy += 1;
+
         m_rb.velocity = Vector2.zero;
 
         if(deadVfx != null)
         {
             GameObject deadVfxClone = GameObject.Instantiate(deadVfx, transform.position, Quaternion.identity);
             Destroy(deadVfxClone, 0.15f);
+        }
+
+
+        int countCollectable = collectablesPrefabs.Count;
+        int indexCollectableRandom = Random.Range(1, countCollectable * 2);
+
+        switch (indexCollectableRandom)
+        {
+            case 1:
+                GameObject collectable1Clone = GameObject.Instantiate(collectablesPrefabs[0].gameObject, transform.position, Quaternion.identity);
+                break;
+            case 2:
+                GameObject collectable2Clone = GameObject.Instantiate(collectablesPrefabs[1].gameObject, transform.position, Quaternion.identity);
+                break;
+            case 3:
+                GameObject collectable3Clone = GameObject.Instantiate(collectablesPrefabs[2].gameObject, transform.position, Quaternion.identity);
+                break;
+            default:
+                break;
         }
 
         gameObject.SetActive(false);

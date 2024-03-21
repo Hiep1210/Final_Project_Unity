@@ -18,3 +18,5 @@ MonoBehaviour:
   ChassingSpeed: 15
   AttackRate: 2
   StartStateRate: 1
+  minScore: 1
+  maxScore: 5

@@ -6,6 +6,7 @@ public enum GameTag
 {
     Player,
     Enemy,
+    Collectable
 }
 
 public enum GameLayer
@@ -40,3 +41,4 @@ public enum StateAnimatorEnemy
     Death,
     Fly
 }
+

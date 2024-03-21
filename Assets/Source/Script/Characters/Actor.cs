@@ -39,6 +39,7 @@ public class Actor : MonoBehaviour
     public float CurrentHp { get => m_currentHp; set => m_currentHp = value; }
     public float CurrentDamage { get => m_currentDamage; set => m_currentDamage = value; }
     public float CurrentMoveSpeed { get => m_currentSpeed; set => m_currentSpeed = value; }
+    public Rigidbody2D Rb2D { get => m_rb; set => m_rb = value; }
 
     protected virtual void Awake()
     {
@@ -73,6 +74,11 @@ public class Actor : MonoBehaviour
             IsDead();
         }
     }
+
+    //public void DistanceKnockBack()
+    //{
+    //    if(spriteRenderer)
+    //}
 
     protected virtual void IsDead()
     {

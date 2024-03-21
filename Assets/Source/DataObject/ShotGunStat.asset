@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cfb8db6aa81bbd4a9949638d4dfd672, type: 3}
   m_Name: ShotGunStat
   m_EditorClassIdentifier: 
-  damage: 30
-  flyBulletSpeed: 60
+  damage: 10
+  flyBulletSpeed: 120
   bulletForce: 5
-  recoil: 5
-  rateTimeFireBullet: 3
+  recoil: 200
+  rateTimeFireBullet: 2
+  countBullet: 150

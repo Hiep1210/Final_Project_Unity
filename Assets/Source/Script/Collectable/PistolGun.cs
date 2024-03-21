@@ -22,12 +22,17 @@ public class PistolGun : MonoBehaviour
     private bool m_isAttacked;
     private float m_currTimeAttack;
 
+    private int m_countBullet;
+    public int CountBullet { get => m_countBullet; set => m_countBullet = value; }
+
     private void Awake()
     {
         m_player = playerGameObject.gameObject.GetComponent<Player>();
         m_gunSp = GetComponent<SpriteRenderer>();
 
         m_gunSp.sortingOrder = 3;
+
+        m_countBullet = pistolGunStat.countBullet;
     }
 
     // Update is called once per frame
@@ -89,7 +94,7 @@ public class PistolGun : MonoBehaviour
 
     private void FireBulletGunChecking()
     {
-        if (GamepadController.Ins.IsFreeBullet && !m_isAttacked)
+        if (GamepadController.Ins.IsFreeBullet && !m_isAttacked && m_countBullet > 0)
         {
             m_isAttacked = true;
             FireBullet();
@@ -114,6 +119,9 @@ public class PistolGun : MonoBehaviour
             GameObject bulletClone = GameObject.Instantiate(pistolBulletPrefabs, bulletSpawnPos.position, Quaternion.identity);
             PistolBullet pistolBullet = bulletClone.gameObject.GetComponent<PistolBullet>();
             pistolBullet.GunObj = gameObject;
+
+            m_countBullet -= 1;
+
             //Rigidbody2D rb = pistolBullet.GetComponent<Rigidbody2D>();
             //rb.AddForce(transform.right * gunPistolStat.bulletForce, ForceMode2D.Impulse);      
         }

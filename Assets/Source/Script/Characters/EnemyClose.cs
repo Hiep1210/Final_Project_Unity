@@ -7,6 +7,8 @@ using UnityEngine;
 [RequireComponent(typeof(DetectTarget))]
 public class EnemyClose : Actor
 {
+    public List<Collectable> collectablesPrefabs;
+
     private AutoMoveFree m_autoMoveFree;
     private DetectTarget m_detectTarget;
 
@@ -36,6 +38,8 @@ public class EnemyClose : Actor
     public float CurChassingStat { get => m_curChassingStat; set => m_curChassingStat = value; }
     public CloseEnemyStat CloseEnemyStat { get => m_closeEnemyStat; set => m_closeEnemyStat = value; }
     public float CurAttackRate { get => m_curAttackRate; set => m_curAttackRate = value; }
+
+
 
     protected override void Awake()
     {
@@ -268,12 +272,35 @@ public class EnemyClose : Actor
     {
         Helper.PlayAnim(animator, StateAnimatorEnemy.Death.ToString());
 
+        int score = Random.Range(m_closeEnemyStat.minScore, m_closeEnemyStat.maxScore);
+        GameManager.Ins.Score += score;
+        GameManager.Ins.CountKillEnemy += 1;
+
         m_rb.velocity = Vector2.zero;
 
-        if(deadVfx != null)
+        if (deadVfx != null)
         {
             GameObject deadVfxClone = GameObject.Instantiate(deadVfx, transform.position, Quaternion.identity);
             Destroy(deadVfxClone, 0.15f);
+        }
+
+
+        int countCollectable = collectablesPrefabs.Count;
+        int indexCollectableRandom = Random.Range(1, countCollectable * 2);
+
+        switch (indexCollectableRandom)
+        {
+            case 1:
+                GameObject collectable1Clone = GameObject.Instantiate(collectablesPrefabs[0].gameObject, transform.position, Quaternion.identity);
+                break;
+            case 2:
+                GameObject collectable2Clone = GameObject.Instantiate(collectablesPrefabs[1].gameObject, transform.position, Quaternion.identity);
+                break;
+            case 3:
+                GameObject collectable3Clone = GameObject.Instantiate(collectablesPrefabs[2].gameObject, transform.position, Quaternion.identity);
+                break;
+            default:
+                break;
         }
 
         gameObject.SetActive(false);

@@ -9,4 +9,5 @@ public class GunStat : ScriptableObject
     public float bulletForce;
     public float recoil;
     public float rateTimeFireBullet;
+    public int countBullet;
 }

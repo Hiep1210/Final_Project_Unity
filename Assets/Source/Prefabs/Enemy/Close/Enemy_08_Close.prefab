@@ -266,3 +266,7 @@ MonoBehaviour:
   deadLayer: 8
   deadVfx: {fileID: 0}
   flashVfx: {fileID: 0}
+  collectablesPrefabs:
+  - {fileID: 2464448462016415843, guid: 00922e276a127be4db531095cc7cd570, type: 3}
+  - {fileID: 6687519366551189095, guid: 01f7117ac75c37c4a849bf46989f427e, type: 3}
+  - {fileID: 4089683077977775317, guid: 007179285d5db224989cfd1642956787, type: 3}

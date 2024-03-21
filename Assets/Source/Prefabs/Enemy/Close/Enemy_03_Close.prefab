@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1209011843
-  m_SortingLayer: -3
+  m_SortingLayer: -4
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: f48d053235f9942e2886d2c9d17199c5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -266,3 +266,7 @@ MonoBehaviour:
   deadLayer: 8
   deadVfx: {fileID: 0}
   flashVfx: {fileID: 0}
+  collectablesPrefabs:
+  - {fileID: 2464448462016415843, guid: 00922e276a127be4db531095cc7cd570, type: 3}
+  - {fileID: 6687519366551189095, guid: 01f7117ac75c37c4a849bf46989f427e, type: 3}
+  - {fileID: 4089683077977775317, guid: 007179285d5db224989cfd1642956787, type: 3}

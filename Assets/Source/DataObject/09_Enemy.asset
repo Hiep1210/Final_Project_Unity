@@ -19,3 +19,5 @@ MonoBehaviour:
   AttackRate: 2
   StartStateRate: 1
   bulletFlySpeed: 15
+  minScore: 1
+  maxScore: 5
