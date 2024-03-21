@@ -8,7 +8,9 @@ public class BossScript : MonoBehaviour
     public GameObject target;
     public float speed =15f ;
     Vector2 moveTo;
+    int count = 0;
     float timeOfStop;
+    public Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,7 +40,6 @@ public class BossScript : MonoBehaviour
             moveTo = target.transform.position;
         }
         turn(moveTo);
-        anim.Play("huc");
         transform.position = Vector2.MoveTowards(transform.position, moveTo, speed * Time.deltaTime);
         //StartCoroutine(Attack(moveTo));
         
